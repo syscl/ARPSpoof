@@ -49,7 +49,6 @@ void FakeARPPacket::setEthIF()
 	struct ifaddrs *ifaddr;
 	struct ifaddrs *ifa;
     int family;
-    char host[NI_MAXHOST];
 
     if (getifaddrs(&ifaddr) == -1) {
         perror("getifaddrs");

@@ -4,7 +4,8 @@
 #ifndef arpAttack_h
 #define arpAttack_h
 
-// do mix linux header with netinet header together this is a recipe for a disaster.
+// don't mix linux header with netinet header together 
+// this is a recipe for a disaster.
 #include <netinet/ip.h>
 #include <linux/if_arp.h>
 #include <linux/if_link.h>
