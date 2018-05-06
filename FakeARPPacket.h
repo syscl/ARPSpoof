@@ -8,14 +8,20 @@
 class FakeARPPacket {
 public:
     // default constructor (randomize everything)
-    FakeARPPacket() {}
-
-    // constructor with interface, router IP, victim IP as arguments
-    FakeARPPacket(char* ifName, char* aRouterIP, char* aVictimIP) : interfaceNo(getInterfaceNo(ifName)), 
-    routerIP(aRouterIP), victimIP(aVictimIP)
+    FakeARPPacket() 
     {
         setEthIF();
     }
+
+    // peferred constructor 
+    FakeARPPacket(char* aRouterIP, char* aVictimIP) : routerIP(aRouterIP), victimIP(aVictimIP)
+    {
+        setEthIF();
+    }
+
+    // constructor with interface, router IP, victim IP as arguments
+    FakeARPPacket(char* ifName, char* aRouterIP, char* aVictimIP) : interfaceNo(getInterfaceNo(ifName)), 
+    routerIP(aRouterIP), victimIP(aVictimIP) {}
 
     // default destructor
     ~FakeARPPacket() {}
@@ -110,7 +116,6 @@ private:
 
 protected:
     int     interfaceNo;
-    char*   interfaceName;
     char*   routerIP;
     char*   victimIP;
     uint8_t routerMAC[kMACAddrSize];
