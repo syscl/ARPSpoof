@@ -7,6 +7,7 @@
 // do mix linux header with netinet header together this is a recipe for a disaster.
 #include <netinet/ip.h>
 #include <linux/if_arp.h>
+#include <linux/if_link.h>
 #include <linux/if_ether.h>
 #include <sys/ioctl.h>
 #include <net/ethernet.h>
@@ -22,6 +23,11 @@
 #include <cstring>
 // inet_pton
 #include <arpa/inet.h>
+
+#include <netdb.h>
+#include <ifaddrs.h>
+#include <unistd.h>
+
 
 using namespace std;
 

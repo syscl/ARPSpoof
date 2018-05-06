@@ -13,7 +13,9 @@ public:
     // constructor with interface, router IP, victim IP as arguments
     FakeARPPacket(char* ifName, char* aRouterIP, char* aVictimIP) : interfaceNo(getInterfaceNo(ifName)), 
     routerIP(aRouterIP), victimIP(aVictimIP)
-    {}
+    {
+        setEthIF();
+    }
 
     // default destructor
     ~FakeARPPacket() {}
@@ -89,6 +91,13 @@ private:
      * Generate random MAC address protects attacker from identifying
      */
     uint8_t* genFakeMACAddr(void) const;
+
+    /**
+     * Get and set ethernet interface
+     * 
+     * @return interface name
+     */
+    void setEthIF();
 
     /**
      * Generate and send packet based on type 
