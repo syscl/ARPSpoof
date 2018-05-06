@@ -179,6 +179,8 @@ function main()
 
     # jump to repo
     _jmp2repo
+    # ensure clean up
+    _tidy_exec "make clean" "Clean up"
     # add update
     git add .
     # gain commit contents

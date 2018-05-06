@@ -206,20 +206,24 @@ template<class T> T* FakeARPPacket::getMember(T *const aMember, const int size) 
 
 char* FakeARPPacket::getRouterIP() const
 {
-	return getMember(routerIP, kIPv4Size);
+	return getMember<char>(routerIP, kIPv4Size);
 }
 
 char* FakeARPPacket::getVictimIP() const
 {
-	return getMember(victimIP, kIPv4Size);
+	return getMember<char>(victimIP, kIPv4Size);
 }
 
 uint8_t* FakeARPPacket::getRouterMAC() const
 {
-	return getMember(routerMAC, kMACAddrSize);
+	// we have to use const_cast for uint8_t[] to uint8_t* 
+	// otherwise compile error
+	return getMember<uint8_t>(const_cast<uint8_t*>(routerMAC), kMACAddrSize);
 }
 
 uint8_t* FakeARPPacket::getVictimMAC() const
 {
-	return getMember(victimMAC, kMACAddrSize);
+	// we have to use const_cast for uint8_t[] to uint8_t* 
+	// otherwise compile error
+	return getMember<uint8_t>(const_cast<uint8_t*>(victimMAC), kMACAddrSize);
 }
