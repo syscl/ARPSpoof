@@ -17,7 +17,8 @@ int main(int argc, char** argv)
     fakeARP.setRouterMAC(routerMAC);
     while (forever || replay > 0) {
         fakeARP.sendReplyPkt();
-        replay--;
+        // prevent replay out of range
+        replay -= forever ? 0 : 1;
     }
     return 0;
 }
