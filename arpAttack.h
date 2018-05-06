@@ -33,14 +33,13 @@
 using namespace std;
 
 // constants defined here
-constexpr int kIPv4Size = 4;
+constexpr int kIPv4Size    = 4;
 constexpr int kMACAddrSize = 6;
-constexpr int ETHERNET_LINK_SIZE = 14;
-constexpr int ARP_TYPE    = 0x0806;
-constexpr int ARP_REQUEST = 1;
-constexpr int ARP_REPLY   = 2;
-constexpr int REV_REQUEST = 3;
-constexpr int REV_REPLY   = 4;
+constexpr int ARP_TYPE     = 0x0806;
+constexpr int ARP_REQUEST  = 1;
+constexpr int ARP_REPLY    = 2;
+constexpr int REV_REQUEST  = 3;
+constexpr int REV_REPLY    = 4;
 
 
 struct _arp_t {

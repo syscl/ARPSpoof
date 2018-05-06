@@ -22,5 +22,5 @@ or
 reply [routerIP] [victimIP] [replay]
 ```
 
-- Note, the argument ```reply``` indicates how many packets you want to send, give a negative number will result infinity packets flood out.
+- Note, the argument ```reply``` indicates how many packets you want to send, give a negative number will result infinity packets flooding out.
 
