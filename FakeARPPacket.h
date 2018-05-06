@@ -27,6 +27,15 @@ public:
     ~FakeARPPacket() {}
 
     /**
+     * Get member value by returning a copy (protect against member being modified)
+     * 
+     * @param target member
+     * @param size   member size
+     * @return member copy
+     */
+    template<class T> T* getMember(T *const aMember, const int size) const;
+
+    /**
      * Send spoofed arp request packet to victim (IP, MAC)
      */
     void sendRequestPkt() const;

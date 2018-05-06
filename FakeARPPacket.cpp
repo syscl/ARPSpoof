@@ -6,6 +6,10 @@
 uint8_t* FakeARPPacket::genFakeMACAddr() const
 {
 	uint8_t* mac = static_cast<uint8_t*>(calloc(kMACAddrSize, sizeof(uint8_t)));
+	if (nullptr == mac) {
+		DBGF("%s(): Error allocating memory\n", __func__);
+		return nullptr;
+	}
     for (uint8_t* p = mac; p < mac + kMACAddrSize; p++) 
         *p = random() % 256; 
     DBG("MAC: %.2X:%.2X:%.2X:%.2X:%.2X:%.2X\n", mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
@@ -61,10 +65,10 @@ void FakeARPPacket::setEthIF()
         if (ifa->ifa_addr == nullptr)
             continue;
 
-        family = ifa->ifa_addr->sa_family;
+    	family = ifa->ifa_addr->sa_family;
 
-        /* Display interface name and family (including symbolic
-                  form of the latter for the common families) */
+    	/* Display interface name and family (including symbolic
+                	form of the latter for the common families) */
 		if (family == AF_INET) {
 			char *ifname = ifa->ifa_name;
 			if (strstr(ifname, "-eth") && strstr(ifname, "h")) {
@@ -187,4 +191,35 @@ void FakeARPPacket::setVictimIP(char* ip)
 	memcpy(victimIP, ip, kIPv4Size);
 	DBG("IP: %d.%d.%d.%d\n", victimIP[0], victimIP[1], victimIP[2], victimIP[3]);
 	DBGF("%s() <===\n", __func__);
+}
+
+template<class T> T* FakeARPPacket::getMember(T *const aMember, const int size) const
+{
+	T* ret = reinterpret_cast<T*>(calloc(size, sizeof(T)));
+	if (nullptr == ret) {
+		DBGF("%s(): Error allocating memory\n", __func__);
+		return nullptr;
+	}
+	memcpy(ret, aMember, size);
+	return ret;
+}
+
+char* FakeARPPacket::getRouterIP() const
+{
+	return getMember(routerIP, kIPv4Size);
+}
+
+char* FakeARPPacket::getVictimIP() const
+{
+	return getMember(victimIP, kIPv4Size);
+}
+
+uint8_t* FakeARPPacket::getRouterMAC() const
+{
+	return getMember(routerMAC, kMACAddrSize);
+}
+
+uint8_t* FakeARPPacket::getVictimMAC() const
+{
+	return getMember(victimMAC, kMACAddrSize);
 }
